@@ -22,25 +22,35 @@
 8. Navigate to the Resource group created, you will find 7 resources created - 
 ![](https://github.com/microsoft/covid19-BackToWork/blob/master/Screenshots/ARMTemplate-Resources.png)
 
-9. Basic configuration settings related to Azure SQL Database
-	
-	9.1: Click on the SQL database resource. On the left pane, go to Settings -> Connection strings and copy the ADO.NET (SQL authentication) string that looks like - 
-*Server=tcp:{your-db-server-name};Initial Catalog={your-database-name};Persist Security Info=False;User ID={your-userID};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+9. Basic configuration settings related to Azure SQL Server
 
-	9.2: You will need a non-SA account to connect to Azure Function in the next Step [Step 3](https://github.com/microsoft/covid19-BackToWork/blob/master/WebchatChannel/3-DataConnection-AzureFunction.md). Create a user with least privileges to have the ***ability to execute stored procedures***  
+	9.1: Click on the SQL server resource. On the left pane, go to Security -> Firewalls and virtual networks -> **Allow Azure services and resources to access this server** , set this to **Yes**
+
+10. Basic configuration settings related to Azure SQL Database
+	
+	10.1: Click on the SQL database resource. On the left pane, go to Settings -> Connection strings and copy the ADO.NET (SQL authentication) string that looks like - 
+**Server=tcp:{your-db-server-name};Initial Catalog={your-database-name};Persist Security Info=False;User ID={your-userID};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;**
+
+	10.2: You will need a non-SA account to connect to Azure Function in the next Step [Step 3](https://github.com/microsoft/covid19-BackToWork/blob/master/WebchatChannel/3-DataConnection-AzureFunction.md). Create a user with least privileges to have the ***ability to execute stored procedures***  
 		- Here is a template to follow to create a new user with ability to [Execute Stored Procedure](https://github.com/microsoft/covid19-BackToWork/blob/master/WebchatChannel/ExecuteStoredProc-SQLUserTemplate.md)
 		- For more information on Database Users, please refer [here](https://docs.microsoft.com/en-us/sql/t-sql/statements/create-user-transact-sql?view=sql-server-ver15)
 
-	9.3: Replace the UserId and Password of the SQL Connection String with this new user's credentials
+	10.3: Replace the UserId and Password of the SQL Connection String with this new user's credentials
 
-10. Basic configuration settings related to Azure Functions
+11. Basic configuration settings related to Azure Functions
 	
-	10.1: Enable App Insights from Settings -> App Insights. Click on "Turn on Application Insights" and create a new resource or choose an existing App Insights resource
-	10.2: Enforce HTTPS requests only by navigating to Settings -> TLS?SSL settings. Set:
+	11.1: Enable App Insights from Settings -> App Insights. Click on "Turn on Application Insights" and create a new resource or choose an existing App Insights resource
+	
+	11.2: Enforce HTTPS requests only by navigating to Settings -> TLS?SSL settings. Set:
 			- HTTPS Only: On
 			- Minimum TLS Version: 1.2
-	10.3: Restrict CORS access: Don't use wildcards in your allowed origins list. Instead, list the specific domains from which you expect to get requests. For more information, see [CORS](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings#cors)
-	10.4: On the left pane under Functions, click on Functions to get list of all deployed functions. **Get Function Url** of each function and paste it for use in Step 2.2 below. The Functions have a [Function level authorization scope](https://docs.microsoft.com/en-us/azure/azure-functions/security-concepts#function-access-keys) and will have a **code=** at the end of each Function Url
+			
+	11.3: Restrict CORS access: Don't use wildcards in your allowed origins list. Instead, list the specific domains from which you expect to get requests. For more information, see [CORS](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings#cors)
+	
+	11.4: On the left pane under Functions, click on Functions to get list of all deployed functions. **Get Function Url** of each function and paste it for use in Step 2.2 below. The Functions have a [Function level authorization scope](https://docs.microsoft.com/en-us/azure/azure-functions/security-concepts#function-access-keys) and will have a **code=** at the end of each Function Url
+	
+**NOTE:** If Azure Functions do not work as expected, please follow the section at end of this page: **NOTE: Local development of Visual Studio code**
+	
 
 ## Step 2.2: Integrate Azure services with Healthcare bot 
 1. Navigate to the Healthcare Bot service admin portal of your instance created in Step 1 of this guide 
@@ -69,9 +79,10 @@ In Get Patient|Read SQL, Base URL = 'https://{azurefunctionsname}.azurewebsites.
 	- [Securing Azure Functions](https://docs.microsoft.com/en-us/azure/azure-functions/security-concepts)
 	- [Networking concepts](https://docs.microsoft.com/en-us/azure/azure-functions/security-baseline)
 	
-- To develop locally for customization to Azure Function code, follow these steps:
+#### NOTE: Local development of Visual Studio code
+To develop locally for customization to Azure Function code, follow these steps:
 1. Download/Clone repo for codebase available at [AzureFunctionsCodebase](https://github.com/microsoft/covid19-BackToWork/tree/master/AzureFunctionsCodebase)
-2. Open downloaded solution in Visual Studio and open Solution Explorer
+2. Open downloaded solution **BackToWork.sln** in Visual Studio and open Solution Explorer
 3. To develop locally, please refer this [guide](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs). You will need a ***local.settings.json*** file in the VS solution with a template like this:
 ```
 {
@@ -84,6 +95,7 @@ In Get Patient|Read SQL, Base URL = 'https://{azurefunctionsname}.azurewebsites.
 }
 ```
 
+4.Right click on BackToWork project -> Publish -> Publish -> Choose the same Azure function to deploy this code and all functions as serverless Azure Function Apps. Please find detailed steps [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs#publish-to-azure)
 
 
 
