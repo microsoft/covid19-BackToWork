@@ -12,18 +12,21 @@ For COVID-19 Back to Work solution, follow these steps to configure the Azure SQ
 6. Under "Compute + storage", if you want to change the defaults, select Configure database.  After making necessary changes, select Apply	
 7. Maintaining default values for other tabs, Click **Create**
 
-**NOTE: For information on Azure SQL Single Database instance, it is highly recommended to go through these links and make necessary configuration changes: **
+** NOTE: For information on Azure SQL Single Database instance, it is highly recommended to go through these links and make necessary configuration changes: **
+	
 	- [Overview documentation](https://docs.microsoft.com/en-us/azure/azure-sql/database/single-database-overview)
 	- [Security documentation](https://docs.microsoft.com/en-us/azure/azure-sql/database/security-overview)
 	- [Firewall settings](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-networkaccess-overview) 
 	- [Add a private endpoint](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
 	- [Server-level IP firewall rules](https://docs.microsoft.com/en-us/azure/azure-sql/database/firewall-create-server-level-portal-quickstart)
 
-8. You will need a non-SA account to connect to Azure Function in the next Step [Step 3](https://github.com/microsoft/covid19-BackToWork/blob/master/WebchatChannel/3-DataConnection-AzureFunction.md). Create a user with least privileges to have the ***ability to execute stored procedures***  
+8. Click on the SQL server resource. On the left pane, go to Security -> Firewalls and virtual networks -> **Allow Azure services and resources to access this server** , set this to **Yes**
+
+9. You will need a non-SA account to connect to Azure Function in the next Step [Step 3](https://github.com/microsoft/covid19-BackToWork/blob/master/WebchatChannel/3-DataConnection-AzureFunction.md). Create a user with least privileges to have the ***ability to execute stored procedures***  
 	- Here is a template to follow to create a new user with ability to [Execute Stored Procedure](https://github.com/microsoft/covid19-BackToWork/blob/master/WebchatChannel/ExecuteStoredProc-SQLUserTemplate.md)
 	- For more information on Database Users, please refer [here](https://docs.microsoft.com/en-us/sql/t-sql/statements/create-user-transact-sql?view=sql-server-ver15)
 	
-9. Replace the User Id and Password of the SQL Connection String with the new user's credentials created in Step 8 above
+10. Replace the User Id and Password of the SQL Connection String with the new user's credentials created in Step 8 above
 
 ## Step 2.2 Download SSMS if not already setup
 
