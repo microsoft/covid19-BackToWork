@@ -381,6 +381,55 @@ namespace BackToWorkFunctions.Helper
                 throw new Exception(ex.Message);
             }
         }
+
+        public static UserContactInfo GetSingleUserContactInfo(String UserId)
+        {
+            try
+            {
+                string sqlConnectionString = Environment.GetEnvironmentVariable("SqlConnectionString", EnvironmentVariableTarget.Process);
+                if (!String.IsNullOrEmpty(sqlConnectionString))
+                {
+                    using (SqlConnection connection = new SqlConnection(sqlConnectionString))
+                    {
+                        connection.Open();
+                        using (SqlCommand cmd = new SqlCommand("GetSingleUserContactInfo", connection))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.Parameters.Add("@UserId", SqlDbType.VarChar).Value = UserId;
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                if (reader != null)
+                                {
+                                    while (reader.Read())
+                                    {
+                                        UserContactInfo userContactInfo = new UserContactInfo();
+                                        userContactInfo.UserId = reader["UserId"].ToString();
+                                        userContactInfo.FullName = reader["FullName"].ToString();
+                                        userContactInfo.EmailAddress = reader["EmailAddress"].ToString();
+                                        userContactInfo.MobilePhone = reader["MobileNumber"].ToString();
+                                        return userContactInfo;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                string errorMsg = "Error: SQL Connection Parameters not found in Configuration";
+                throw new ArgumentNullException(errorMsg);
+            }
+            catch (SqlException sqlEx)
+            {
+                throw new Exception(sqlEx.Message);
+            }
+            catch (ArgumentNullException argNullEx)
+            {
+                throw new ArgumentNullException(argNullEx.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 
 }
