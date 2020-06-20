@@ -3,7 +3,7 @@
 The default login mechanism is to provide a Unique ID and Year of Birth. If you wish to use other types, there is support provided in the SQL database to handle **Login using Azure Active Directory** 
 
 ## Login using Azure Active Directory
-### Register an Enterprise application & Grant appropriate API permissions
+#### Register an Enterprise application & Grant appropriate API permissions
 1. Register an Enterprise application: Sign in to Azure [portal](https://portal.azure.com/). Navigate to your organizations Azure Active Directory and create a new App Registration. Learn more about  [creating an app registration](https://docs.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app#targetText=Azure%20AD%20assigns%20a%20unique,%2C%20API%20permissions%2C%20and%20more.)
 2. Take note of the Application (client) ID, Directory (tenant) ID from Overview blade
 3. Enable the relevant permissions for the application and if required ask a Global Admin for the organization to "Grant Admin consent". To enable login, the following Microsoft Graph API permissions need to be added:
@@ -30,4 +30,8 @@ The default login mechanism is to provide a Unique ID and Year of Birth. If you 
 	- Access Token URL: https://login.microsoftonline.com/*tenant-ID*/oauth2/v2.0/token
 	- scope: https://graph.microsoft.com/.default
 5. Save or Update the details
+
+#### Import the relevant scenario
+1. Download scenario "COVID19 Back to Work SQL with AAD.json" from the [Scripts](https://github.com/microsoft/covid19-BackToWork/tree/master/Scripts) folder
+2. In the healthcare bot admin portal, go to Scenarios -> Manage. Click Import and choose "COVID19 Back to Work SQL with AAD.json" without any naming changes (You can edit after import succeeds)
 
