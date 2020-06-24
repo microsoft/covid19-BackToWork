@@ -88,9 +88,9 @@ To develop locally for customization to Azure Function code, follow these steps:
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName={associated-storage-account-name};AccountKey={account-key};EndpointSuffix=core.windows.net", /*This is the Connection String of an Azure Storage account you want to connect to this Azure Function*/
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName={associated-storage-account-name};AccountKey={account-key};EndpointSuffix=core.windows.net", 
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "SqlConnectionString": "Server=tcp:{your-db-server-name};Initial Catalog={your-database-name};Persist Security Info=False;User ID={your-userID};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" /*This is the Connection String of Azure SQL database created in "Step 2: Create backend Azure SQL Database" */
+    "SqlConnectionString": "Server=tcp:{your-db-server-name};Initial Catalog={your-database-name};Persist Security Info=False;User ID={your-userID};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   }
 }
 ```

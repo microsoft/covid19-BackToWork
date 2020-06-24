@@ -9,14 +9,15 @@
 {
   "IsEncrypted": false,
   "Values": {
-    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName={associated-storage-account-name};AccountKey={account-key};EndpointSuffix=core.windows.net", /*This is the Connection String of an Azure Storage account you want to connect to this Azure Function*/
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName={associated-storage-account-name};AccountKey={account-key};EndpointSuffix=core.windows.net",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet",
-    "SqlConnectionString": "Server=tcp:{your-db-server-name};Initial Catalog={your-database-name};Persist Security Info=False;User ID={your-userID};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" /*This is the Connection String of Azure SQL database created in "Step 2: Create backend Azure SQL Database" */
+    "SqlConnectionString": "Server=tcp:{your-db-server-name};Initial Catalog={your-database-name};Persist Security Info=False;User ID={your-userID};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
   }
 }
 ```
 
-4. Right click on BackToWork project -> Publish -> Publish -> Choose an Azure function to deploy this code and all functions as serverless Azure Function Apps. 
+4. Right click on the BackToWorkFunctions project and Rebuild solution (or Clean + Build solution)
+5. Right click on BackToWork project -> Publish -> Publish -> Choose an Azure function to deploy this code and all functions as serverless Azure Function Apps. 
 Please find detailed steps [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs#publish-to-azure)
 5. Sign in to Azure [portal](https://portal.azure.com/) , navigate to the Azure Function app created in previous step and go to its Settings -> Configuration -> Application settings
 6. Click on +New application setting and add 
@@ -24,7 +25,7 @@ Please find detailed steps [here](https://docs.microsoft.com/en-us/azure/azure-f
 	- Value: Connection String of Azure SQL database created in [Step 2](https://github.com/microsoft/covid19-BackToWork/blob/master/WebchatChannel/2-Createbackend-AzureSQLDatabase.md) in form similar to "Server=tcp:your-db-server-name;Initial Catalog=your-database-name;Persist Security Info=False;User ID=your-userID;Password=your-password;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 	- **NOTE: Please make sure the UserID & Password in this Connection String has a user with least privileges required to execute the stored procedures **
 7. Enable App Insights from Settings -> App Insights. Click on "Turn on Application Insights" and create a new resource or choose an existing App Insights resource
-8. Enforce HTTPS requests only by navigating to Settings -> TLS?SSL settings. Set:
+8. Enforce HTTPS requests only by navigating to Settings -> TLS/SSL settings. Set:
 	- HTTPS Only: On
 	- Minimum TLS Version: 1.2
 9. Restrict CORS access: Don't use wildcards in your allowed origins list. Instead, list the specific domains from which you expect to get requests. For more information, see [CORS](https://docs.microsoft.com/en-us/azure/azure-functions/functions-how-to-use-azure-function-app-settings#cors)

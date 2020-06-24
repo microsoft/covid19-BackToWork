@@ -33,7 +33,7 @@ If you followed previous steps of this solution accurately and created all the A
 We need to modify 2 things for this function and this can be done in the cloned Visual Studio codebase.
 Open your codebase and go to TriggerNotification.cs 
 1) In Line 12, there is a <[Disable] > just above FunctionName("TriggerNotification"). Remove this line
-2) Modify the ncrontab expression ("0 8 0 * * *") to suit a time based on your decisions. Find more details on ncrontab expressions [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=csharp#ncrontab-expressions)
+2) Modify the ncrontab expression ("0 8 0 * * *") to suit a time based on your decisions. [Find more details on ncrontab expressions here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=csharp#ncrontab-expressions)
 
 Final code for an enabled trigger function running everyday at 8 am looks like:
 ```

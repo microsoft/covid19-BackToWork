@@ -15,5 +15,3 @@ Here are few sample screenshots for quick reference:
 ![](https://github.com/microsoft/covid19-BackToWork/blob/master/Screenshots/PBIScreeningReport.png)
 
 ![](https://github.com/microsoft/covid19-BackToWork/blob/master/Screenshots/PBIRegionalReport.png)
-
-![](https://github.com/microsoft/covid19-BackToWork/blob/master/Screenshots/PBIMissedScreeningsReport.png)

@@ -12,13 +12,13 @@ For COVID-19 Back to Work solution, follow these steps to configure the Azure SQ
 6. Under "Compute + storage", if you want to change the defaults, select Configure database.  After making necessary changes, select Apply	
 7. Maintaining default values for other tabs, Click **Create**
 
-** NOTE: For information on Azure SQL Single Database instance, it is highly recommended to go through these links and make necessary configuration changes: **
+**NOTE: For information on Azure SQL Single Database instance, it is highly recommended to go through these links and make necessary configuration changes:**
 	
-	- [Overview documentation](https://docs.microsoft.com/en-us/azure/azure-sql/database/single-database-overview)
-	- [Security documentation](https://docs.microsoft.com/en-us/azure/azure-sql/database/security-overview)
-	- [Firewall settings](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-networkaccess-overview) 
-	- [Add a private endpoint](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
-	- [Server-level IP firewall rules](https://docs.microsoft.com/en-us/azure/azure-sql/database/firewall-create-server-level-portal-quickstart)
+- [Overview documentation](https://docs.microsoft.com/en-us/azure/azure-sql/database/single-database-overview)
+- [Security documentation](https://docs.microsoft.com/en-us/azure/azure-sql/database/security-overview)
+- [Firewall settings](https://docs.microsoft.com/en-us/azure/sql-database/sql-database-networkaccess-overview) 
+- [Add a private endpoint](https://docs.microsoft.com/en-us/azure/private-link/private-endpoint-overview)
+- [Server-level IP firewall rules](https://docs.microsoft.com/en-us/azure/azure-sql/database/firewall-create-server-level-portal-quickstart)
 
 8. Click on the SQL server resource. On the left pane, go to Security -> Firewalls and virtual networks -> **Allow Azure services and resources to access this server** , set this to **Yes**
 
