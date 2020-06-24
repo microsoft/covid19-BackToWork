@@ -94,8 +94,8 @@ To develop locally for customization to Azure Function code, follow these steps:
   }
 }
 ```
-
-4.Right click on BackToWork project -> Publish -> Publish -> Choose the same Azure function to deploy this code and all functions as serverless Azure Function Apps. Please find detailed steps [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs#publish-to-azure)
+4. Right click on the BackToWorkFunctions project and Rebuild solution (or Clean + Build solution)
+5. Right click on BackToWork project -> Publish -> Publish -> Choose the same Azure function to deploy this code and all functions as serverless Azure Function Apps. Please find detailed steps [here](https://docs.microsoft.com/en-us/azure/azure-functions/functions-develop-vs#publish-to-azure)
 
 
 
