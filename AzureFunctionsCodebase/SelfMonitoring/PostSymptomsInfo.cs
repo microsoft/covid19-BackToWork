@@ -33,39 +33,40 @@ namespace BackToWorkFunctions
                 {
                     return new BadRequestObjectResult("Error: Incorrect payload");
                 }
-                string SrcEmail = Environment.GetEnvironmentVariable("SrcEmail", EnvironmentVariableTarget.Process);
-                string AuthorName = Environment.GetEnvironmentVariable("AuthorName", EnvironmentVariableTarget.Process);
-                string SendGridAPIKey = Environment.GetEnvironmentVariable("SendGridAPIKey", EnvironmentVariableTarget.Process);
-                if (SrcEmail == "" | AuthorName == "" | SendGridAPIKey == "")
-                {
-                    return new BadRequestObjectResult("Error: Writing to database did not complete. One or more configuration parameters for SendGrid are missing.");
-                }
-                UserContactInfo userContactInfo = DbHelper.GetSingleUserContactInfo(symptomsInfo.UserId.ToString());
-                string DestEmail = userContactInfo.EmailAddress.ToString();
-
-                string RecipientName = userContactInfo.FullName.ToString();
-                bool isClearToWork = symptomsInfo.ClearToWorkToday;
-                string recordGUID = "";
-                string imageBase64Encoding = "";
-                if (isClearToWork == true)
-                {
-                    recordGUID = Guid.NewGuid().ToString();
-                    symptomsInfo.GUID = recordGUID;
-                    imageBase64Encoding = NotificationHelper.GenerateQRCode(recordGUID);
-                }
-
-                string DateOfEntry = symptomsInfo.DateOfEntry.ToString();
-
-                NotificationHelper.SendSummaryEmailWithQRCode(DestEmail, SrcEmail, AuthorName, RecipientName, isClearToWork, symptomsInfo, imageBase64Encoding, SendGridAPIKey, DateOfEntry);
+                
                 bool dataRecorded = DbHelper.PostDataAsync(symptomsInfo, Constants.postSymptomsInfo);
                 if (dataRecorded)
                 {
+                    string SrcEmail = Environment.GetEnvironmentVariable("SrcEmail", EnvironmentVariableTarget.Process);
+                    string AuthorName = Environment.GetEnvironmentVariable("AuthorName", EnvironmentVariableTarget.Process);
+                    string SendGridAPIKey = Environment.GetEnvironmentVariable("SendGridAPIKey", EnvironmentVariableTarget.Process);
+                    if (!String.IsNullOrEmpty(SrcEmail) && !String.IsNullOrEmpty(AuthorName) && !String.IsNullOrEmpty(SendGridAPIKey))
+                    {
+                        UserContactInfo userContactInfo = DbHelper.GetSingleUserContactInfo(symptomsInfo.UserId.ToString());
+                        string DestEmail = userContactInfo.EmailAddress.ToString();
+
+                        string RecipientName = userContactInfo.FullName.ToString();
+                        bool isClearToWork = symptomsInfo.ClearToWorkToday;
+                        string recordGUID = "";
+                        string imageBase64Encoding = "";
+                        if (isClearToWork == true)
+                        {
+                            recordGUID = Guid.NewGuid().ToString();
+                            symptomsInfo.GUID = recordGUID;
+                            imageBase64Encoding = NotificationHelper.GenerateQRCode(recordGUID);
+                        }
+
+                        string DateOfEntry = symptomsInfo.DateOfEntry.ToString();
+
+                        NotificationHelper.SendSummaryEmailWithQRCode(DestEmail, SrcEmail, AuthorName, RecipientName, isClearToWork, symptomsInfo, imageBase64Encoding, SendGridAPIKey, DateOfEntry);
+                    }
                     return new OkObjectResult("Status: OK");
                 }
                 else
                 {
                     return new BadRequestObjectResult("Error: Writing to database did not complete");
                 }
+
 
 
             }
