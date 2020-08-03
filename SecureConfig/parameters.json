@@ -1,0 +1,51 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vulnerabilityAssessments_Default_storageContainerPath": {
+            "value": null
+        },
+        "servers_sql_covidrtw_name": {
+            "value": null
+        },
+        "sites_fx_test_covidrtw_name": {
+            "value": null
+        },
+        "bastionHosts_bastion_host_name": {
+            "value": null
+        },
+        "publicIPAddresses_appgw_ip_name": {
+            "value": null
+        },
+        "networkInterfaces_sqlvm_nic_name": {
+            "value": null
+        },
+        "publicIPAddresses_bastion_ip_name": {
+            "value": null
+        },
+        "virtualMachines_sqlvm_machine_name": {
+            "value": null
+        },
+        "privateEndpoints_sql_endpoint_name": {
+            "value": null
+        },
+        "virtualNetworks_vnet_covidrtw_name": {
+            "value": null
+        },
+        "storageAccounts_storagecovidrtw_name": {
+            "value": null
+        },
+        "applicationGateways_rtw_appgateway_name": {
+            "value": null
+        },
+        "serverfarms_azure_functions_test_service_plan_name": {
+            "value": null
+        },
+        "privateDnsZones_privatelink_database_windows_net_name": {
+            "value": null
+        },
+        "networkInterfaces_sql_endpoint_nic_a872867d_d802_4c30_9818_5404a3d61bd9_name": {
+            "value": null
+        }
+    }
+}
