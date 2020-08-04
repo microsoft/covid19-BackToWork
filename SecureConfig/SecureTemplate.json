@@ -142,7 +142,11 @@
                         "name": "appServiceSubnet",
                         "properties": {
                             "addressPrefix": "10.0.96.0/20",
-                            "serviceEndpoints": [],
+                            "serviceEndpoints": [
+                                {
+                                    "service": "Microsoft.Storage"
+                                }
+                            ],
                             "delegations": [
                                 {
                                     "name": "webapp",
@@ -225,9 +229,8 @@
                     "bypass": "AzureServices",
                     "virtualNetworkRules": [
                         {
-                            "id": "[concat(parameters('virtualNetworks_vnet_covidrtw_name'), '/subnets/appServiceSubnet')]",
-                            "action": "Allow",
-                            "state": "Succeeded"
+                            "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_vnet_covidrtw_name'), 'appServiceSubnet')]",
+                            "action": "Allow"
                         }
                     ],
                     "ipRules": [],
@@ -443,7 +446,11 @@
             ],
             "properties": {
                 "addressPrefix": "10.0.96.0/20",
-                "serviceEndpoints": [],
+                "serviceEndpoints": [
+                    {
+                        "service": "Microsoft.Storage"
+                    }
+                ],
                 "delegations": [
                     {
                         "name": "webapp",
@@ -631,8 +638,10 @@
             "name": "[parameters('applicationGateways_rtw_appgateway_name')]",
             "location": "[parameters('location')]",
             "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_vnet_covidrtw_name'))]",
                 "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_vnet_covidrtw_name'), 'app_gateway_subnet')]",
-                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_appgw_ip_name'))]"
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_appgw_ip_name'))]",
+                "[resourceId('Microsoft.Web/sites', parameters('sites_fx_covidrtw_name'))]"
             ],
             "properties": {
                 "sku": {
