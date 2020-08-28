@@ -699,8 +699,11 @@
                             "port": 80,
                             "protocol": "Http",
                             "cookieBasedAffinity": "Disabled",
-                            "pickHostNameFromBackendAddress": false,
-                            "requestTimeout": 1
+                            "pickHostNameFromBackendAddress": true,
+                            "requestTimeout": 1,
+                            "probe": {
+                                "id": "[concat(resourceId('Microsoft.Network/applicationGateways', parameters('applicationGateways_rtw_appgateway_name')), '/probes/fx-apphealth')]"
+                            }
                         }
                     }
                 ],
@@ -739,7 +742,22 @@
                         }
                     }
                 ],
-                "probes": [],
+                "probes": [
+                        {
+                        "name": "fx-apphealth",
+                        "properties": {
+                            "protocol": "Http",
+                            "host": "[concat(parameters('sites_fx_covidrtw_name'), '.azurewebsites.net')]",
+                            "path": "/",
+                            "interval": 30,
+                            "timeout": 30,
+                            "unhealthyThreshold": 3,
+                            "pickHostNameFromBackendHttpSettings": false,
+                            "minServers": 0,
+                            "match": {}
+                        }
+                    }
+                ],
                 "rewriteRuleSets": [],
                 "redirectConfigurations": [],
                 "privateLinkConfigurations": [],
